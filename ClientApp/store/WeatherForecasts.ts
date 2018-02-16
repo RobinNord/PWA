@@ -45,10 +45,13 @@ export const actionCreators = {
     requestWeatherForecasts: (startDateIndex: number): AppThunkAction<KnownAction> => (dispatch, getState) => {
         // Only load data if it's something we don't already have (and are not already loading)
         if (startDateIndex !== getState().weatherForecasts.startDateIndex) {
-            let fetchTask = fetch(`api/SampleData/WeatherForecasts?startDateIndex=${ startDateIndex }`)
+            let fetchTask = fetch(`api/SampleData/WeatherForecasts?startDateIndex=${startDateIndex}`)
                 .then(response => response.json() as Promise<WeatherForecast[]>)
                 .then(data => {
                     dispatch({ type: 'RECEIVE_WEATHER_FORECASTS', startDateIndex: startDateIndex, forecasts: data });
+                })
+                .catch(err => { 
+                    
                 });
 
             addTask(fetchTask); // Ensure server-side prerendering waits for this to complete

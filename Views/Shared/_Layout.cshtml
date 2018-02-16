@@ -6,11 +6,11 @@
     <title>@ViewData["Title"] - ProgressiveWebApp</title>
     <base href="~/" />
 
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
-    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#26bce7">
+    <link rel="apple-touch-icon" sizes="180x180" href="~/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="~/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="~/favicon-16x16.png">
+    <link rel="manifest" href="~/webmanifest.json">
+    <link rel="mask-icon" href="~/safari-pinned-tab.svg" color="#26bce7">
     <meta name="msapplication-TileColor" content="#da532c">
     <link rel="stylesheet" href="~/dist/vendor.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/dist/site.css" asp-append-version="true" />
@@ -19,6 +19,16 @@
     @RenderBody()
 
     <script src="~/dist/vendor.js" asp-append-version="true"></script>
+    <script>
+        (function(){
+            if('serviceWorker' in navigator){
+                navigator.serviceWorker.register('sw.js')
+                    .then(console.log("SW started!"))
+                    .catch(console.error);
+            }
+        })();
+    </script>
+
     @RenderSection("scripts", required: false)
 </body>
 </html>
